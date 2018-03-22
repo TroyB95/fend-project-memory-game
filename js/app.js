@@ -11,6 +11,9 @@ let count = 0;
 // The dom variable for the moves class
 const moves = document.querySelector('.moves');
 
+// The dom variable for the stars
+const stars = document.querySelector('.stars');
+
 // Loop through cards to display
 for (var i = 0; i < cards.length; i++) {
 	cards[i].addEventListener('click', showCard)
@@ -61,9 +64,7 @@ function shuffle(array) {
 // Add the card which gets flipped to the flipped cards array and see if they match
 function flipCard(){
 	flippedCards.push(this);
-	console.log(flippedCards);
 	let length = flippedCards.length;
-
 	if (length === 2){
 		moveCount();
 		if(flippedCards[0].dataset.id === flippedCards[1].dataset.id){
@@ -78,7 +79,7 @@ function flipCard(){
 			    flippedCards[1].classList.remove("remove-events");
 			    flippedCards = [];
 			    reactivate();
-				}, 1000);
+				}, 1500);
 			}
 		}
 	};
@@ -111,9 +112,19 @@ for(var i = 0; i < cards.length; i++){
 	cards[i].addEventListener('click', flipCard);
 }
 
+// Move counter function
 function moveCount(){
 	count++;
 	moves.innerHTML = count;
+	if(count < 15){
+		stars.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>'  					
+	} else if (count < 25) {
+		stars.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>'
+	} else if (count < 35) {
+		stars.innerHTML = '<li><i class="fa fa-star"></i></li>'
+	} else {
+		stars.innerHTML = ''
+	}
 }
 /*
  * set up the event listener for a card. If a card is clicked:
