@@ -14,6 +14,21 @@ const moves = document.querySelector('.moves');
 // The dom variable for the stars
 const stars = document.querySelector('.stars');
 
+// Restart button 
+const restartButton = document.querySelector('.restart');
+
+// Timer
+const clock = document.querySelector('.timer');
+
+// Seconds variable
+let seconds = 0;
+
+// Minutes variable
+let minutes = 0;
+
+// Amount of cards matched
+let matchedCount = 0;
+
 // Loop through cards to display
 for (var i = 0; i < cards.length; i++) {
 	cards[i].addEventListener('click', showCard)
@@ -67,6 +82,7 @@ function flipCard(){
 	let length = flippedCards.length;
 	if (length === 2){
 		moveCount();
+		// matchCounter();
 		if(flippedCards[0].dataset.id === flippedCards[1].dataset.id){
 			matched()
 		} else {
@@ -79,7 +95,7 @@ function flipCard(){
 			    flippedCards[1].classList.remove("remove-events");
 			    flippedCards = [];
 			    reactivate();
-				}, 1500);
+				}, 1000);
 			}
 		}
 	};
@@ -126,6 +142,44 @@ function moveCount(){
 		stars.innerHTML = ''
 	}
 }
+
+// Click listener on the restart button
+restartButton.addEventListener('click', restart);
+
+function restart(){
+	count = 0;
+	moves.innerHTML = count;
+	stars.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>'
+	createGrid();
+	minutes = 0;
+	seconds = 0;
+}
+
+setInterval(timer, 1000);
+
+function timer(){
+	seconds ++;
+	clock.innerHTML = minutes + ' Minutes : ' + seconds + ' Seconds';
+	if(seconds === 60){
+		seconds = 0;
+		minutes++;
+	}
+}
+
+// Function to determine if all are matched
+// function matchCounter(){
+// 	for(var i = 0; i < cards.length; i++){
+// 		if(cards[i].classList.contains('match') === true){
+// 			matchedCount++;
+// 			flippedCards[0].classList.add("matchOne");
+//     		flippedCards[1].classList.add("matchOne");
+//     		flippedCards[0].classList.remove("match");
+//     		flippedCards[1].classList.remove("match");
+// 		}
+// 	}
+// }
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
