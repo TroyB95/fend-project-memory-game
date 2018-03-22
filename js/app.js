@@ -5,6 +5,12 @@ let cards = [...card];
 // Array which will compare to see if matching
 let flippedCards = [];
 
+// Number of moves a player has used
+let count = 0;
+
+// The dom variable for the moves class
+const moves = document.querySelector('.moves');
+
 // Loop through cards to display
 for (var i = 0; i < cards.length; i++) {
 	cards[i].addEventListener('click', showCard)
@@ -59,7 +65,7 @@ function flipCard(){
 	let length = flippedCards.length;
 
 	if (length === 2){
-		// moves();
+		moveCount();
 		if(flippedCards[0].dataset.id === flippedCards[1].dataset.id){
 			matched()
 		} else {
@@ -86,16 +92,6 @@ function matched(){
     flippedCards = [];
 }
 
-
-// function notMatched(){
-
-//     flippedCards[0].classList.remove("show", "open");
-//     flippedCards[1].classList.remove("show", "open");
-//     flippedCards[0].classList.remove("remove-events");
-//     flippedCards[1].classList.remove("remove-events");
-//     flippedCards = [];
-// }
-
 // Function to stop cards being clickable when not matched
 function deactivate(){
 	for(var i = 0; i < cards.length; i++) {
@@ -115,6 +111,10 @@ for(var i = 0; i < cards.length; i++){
 	cards[i].addEventListener('click', flipCard);
 }
 
+function moveCount(){
+	count++;
+	moves.innerHTML = count;
+}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
