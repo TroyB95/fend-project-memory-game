@@ -5,6 +5,9 @@ let cards = [...card];
 // Array which will compare to see if matching
 let flippedCards = [];
 
+// amount of matched card
+let matchedCards = document.getElementsByClassName('match');
+
 // Number of moves a player has used
 let count = 0;
 
@@ -82,9 +85,9 @@ function flipCard(){
 	let length = flippedCards.length;
 	if (length === 2){
 		moveCount();
-		// matchCounter();
 		if(flippedCards[0].dataset.id === flippedCards[1].dataset.id){
-			matched()
+			matched();
+			finished();
 		} else {
 			deactivate();
 			// Not matched function which flips them back over
@@ -155,7 +158,12 @@ function restart(){
 	seconds = 0;
 }
 
-setInterval(timer, 1000);
+let startTimer = setInterval(timer, 1000);
+
+
+function stopTimer(){
+	clearInterval(startTimer);
+}
 
 function timer(){
 	seconds ++;
@@ -167,26 +175,11 @@ function timer(){
 }
 
 // Function to determine if all are matched
-// function matchCounter(){
-// 	for(var i = 0; i < cards.length; i++){
-// 		if(cards[i].classList.contains('match') === true){
-// 			matchedCount++;
-// 			flippedCards[0].classList.add("matchOne");
-//     		flippedCards[1].classList.add("matchOne");
-//     		flippedCards[0].classList.remove("match");
-//     		flippedCards[1].classList.remove("match");
-// 		}
-// 	}
-// }
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+function finished(){
+	if(matchedCards.length == 16){
+		alert('You have finished! Well done! Your final time was ' + minutes + ' minutes ' + seconds + ' seconds and you completed it in ' + count + ' moves!');
+		seconds = 0;
+		mintues = 0;
+		stopTimer();
+	}
+}
