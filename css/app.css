@@ -31,22 +31,23 @@ body {
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+    margin-bottom: 0;
 }
+
 
 /*
  * Styles for the deck of cards
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
+    width: 50%;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
-    border-radius: 10px;
+    padding: 6px;
+    border-radius: 6px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin: 0 0 3em;
 }
@@ -55,6 +56,7 @@ h1 {
     height: 125px;
     width: 125px;
     background: #2e3d49;
+    margin: 6px 6px;
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
@@ -93,6 +95,7 @@ h1 {
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
+    margin: 0 auto;
 }
 
 .score-panel .stars {
@@ -110,4 +113,45 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+@media screen and (max-width: 399px) {
+	h1 {
+		font-size: 1.75em;
+	}
+
+	.deck {
+		width: 90%;
+	}
+
+	.deck .card {
+		height: 3.5rem;
+		width: 3.5rem;
+	}
+}
+
+@media screen and (max-width: 599px) and (min-width: 400px) {
+	h1 {
+		font-size: 1.75em;
+	}
+	
+	.deck {
+		width: 85%;
+	}
+
+	.deck .card {
+		height: 4.5rem;
+		width: 4.5rem;
+	}
+}
+
+@media screen and (min-width: 600px) and (max-width: 1015px) {
+	.deck {
+		width: 75%;
+	}
+
+	.deck .card {
+		height: 8.5rem;
+		width: 8.5rem;
+	}
 }
