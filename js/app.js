@@ -32,6 +32,13 @@ let minutes = 0;
 // Amount of cards matched
 let matchedCount = 0;
 
+// Modal element
+const modal = document.getElementById('finishModal');
+
+const closeBtn = document.querySelector('.close-btn');
+
+const congratMes = document.querySelector('.congrats');
+
 // Loop through cards to display
 for (var i = 0; i < cards.length; i++) {
 	cards[i].addEventListener('click', showCard)
@@ -174,10 +181,36 @@ function timer(){
 	}
 }
 
+
+// Event listener for close btn in modal
+closeBtn.addEventListener('click', closeModal);
+
+// Add click listener to window to close modal
+window.addEventListener('click', outsideClick);
+
+
+// Show finish modal
+function finishModal(){
+	modal.style.display = 'block';
+}
+
+// Close modal
+function closeModal(){
+	modal.style.display = 'none';
+}
+
+// Close modal by a click outside the modal window
+function outsideClick(e){
+	if(e.target == modal){
+	modal.style.display = 'none';
+	}
+}
+
 // Function to determine if all are matched
 function finished(){
 	if(matchedCards.length == 16){
-		alert('You have finished! Well done! Your final time was ' + minutes + ' minutes ' + seconds + ' seconds and you completed it in ' + count + ' moves!');
+		congratMes.innerHTML = 'You have completed it well done! Your final time was ' + minutes + ' minutes ' + seconds + ' seconds!';
+		finishModal();
 		seconds = 0;
 		mintues = 0;
 		stopTimer();
