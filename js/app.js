@@ -35,9 +35,14 @@ let matchedCount = 0;
 // Modal element
 const modal = document.getElementById('finishModal');
 
+// Close btn in modal
 const closeBtn = document.querySelector('.close-btn');
 
+// The p element in the modal
 const congratMes = document.querySelector('.congrats');
+
+// Play again btn
+const playAgainBtn = document.querySelector('.play-again-btn');
 
 // Loop through cards to display
 for (var i = 0; i < cards.length; i++) {
@@ -66,7 +71,7 @@ function createGrid(){
 		[].forEach.call(shuffled, function(card){
 			deck.appendChild(card);
 		});
-		 cards[i].classList.remove("show", "open", "match");
+		 cards[i].classList.remove("show", "open", "match", "remove-events");
 	}
 };
 
@@ -157,12 +162,14 @@ function moveCount(){
 restartButton.addEventListener('click', restart);
 
 function restart(){
+	stopTimer();
 	count = 0;
 	moves.innerHTML = count;
 	stars.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>'
 	createGrid();
 	minutes = 0;
 	seconds = 0;
+	startTimer = setInterval(timer, 1000);
 }
 
 let startTimer = setInterval(timer, 1000);
@@ -188,6 +195,8 @@ closeBtn.addEventListener('click', closeModal);
 // Add click listener to window to close modal
 window.addEventListener('click', outsideClick);
 
+// Play again click listner
+playAgainBtn.addEventListener('click', playAgain);
 
 // Show finish modal
 function finishModal(){
@@ -204,6 +213,18 @@ function outsideClick(e){
 	if(e.target == modal){
 	modal.style.display = 'none';
 	}
+}
+
+function playAgain(){
+	stopTimer();
+	count = 0;
+	moves.innerHTML = count;
+	stars.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>'
+	createGrid();
+	minutes = 0;
+	seconds = 0;
+	modal.style.display = 'none';
+	startTimer = setInterval(timer, 1000);
 }
 
 // Function to determine if all are matched
