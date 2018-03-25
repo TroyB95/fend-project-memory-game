@@ -29,9 +29,6 @@ let seconds = 0;
 // Minutes variable
 let minutes = 0;
 
-// Amount of cards matched
-let matchedCount = 0;
-
 // Modal element
 const modal = document.getElementById('finishModal');
 
@@ -73,7 +70,7 @@ function createGrid(){
 		});
 		 cards[i].classList.remove("show", "open", "match", "remove-events");
 	}
-};
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -148,14 +145,12 @@ function moveCount(){
 	count++;
 	moves.innerHTML = count;
 	if(count < 15){
-		stars.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>'  					
+		stars.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>';  					
 	} else if (count < 25) {
-		stars.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>'
-	} else if (count < 35) {
-		stars.innerHTML = '<li><i class="fa fa-star"></i></li>'
+		stars.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>';
 	} else {
-		stars.innerHTML = ''
-	}
+		stars.innerHTML = '<li><i class="fa fa-star"></i></li>';
+	} 
 }
 
 // Click listener on the restart button
